@@ -1,6 +1,6 @@
 name: general_feature_flags
 description: A robust, multi-provider feature flag system for Flutter. Professional, extensible, and corporate-ready.
-version: 0.1.0
+version: 0.1.1
 homepage: https://rivendev.app
 repository: https://github.com/rivendev-app/general_feature_flags
 directory: general_feature_flags

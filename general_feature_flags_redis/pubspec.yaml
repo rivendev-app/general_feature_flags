@@ -1,6 +1,6 @@
 name: general_feature_flags_redis
 description: Redis adapter for general_feature_flags (via HTTP/REST).
-version: 0.1.0
+version: 0.1.1
 homepage: https://rivendev.app
 repository: https://github.com/rivendev-app/general_feature_flags
 directory: general_feature_flags_redis
@@ -13,7 +13,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  general_feature_flags: ^0.1.0
+  general_feature_flags: ^0.1.1
   http: ^1.2.0
 
 dev_dependencies:
