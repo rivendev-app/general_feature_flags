@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:general_feature_flags/general_feature_flags.dart';
 import 'package:http/http.dart' as http;
 
+/// A feature flag provider that fetches flags from a generic JSON HTTP endpoint.
 class HttpProvider extends BaseFeatureFlagProvider {
   final String url;
   final Map<String, String>? headers;
@@ -10,6 +11,11 @@ class HttpProvider extends BaseFeatureFlagProvider {
   final Duration? pollingInterval;
   Timer? _timer;
 
+  /// Creates an [HttpProvider].
+  ///
+  /// [url] is the endpoint that returns a JSON map of flags.
+  /// [headers] are optional HTTP headers for the request.
+  /// [pollingInterval] enables automatic background refreshing.
   HttpProvider({
     required this.url,
     this.headers,
@@ -60,6 +66,7 @@ class HttpProvider extends BaseFeatureFlagProvider {
     }
   }
 
+  /// Stops the polling timer.
   void dispose() {
     _timer?.cancel();
   }

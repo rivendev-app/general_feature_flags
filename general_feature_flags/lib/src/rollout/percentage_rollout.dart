@@ -1,10 +1,17 @@
 import '../utils/hashing.dart';
 import 'rollout_strategy.dart';
 
+/// A strategy that rolls out a feature to a specific percentage of users.
+///
+/// The rollout is sticky based on the [userId].
 class PercentageRollout extends RolloutStrategy {
+  /// The percentage of users that should see the feature (0.0 to 100.0).
   final double percentage;
+  
+  /// Optional list of specific flag keys this strategy applies to.
   final List<String>? keys;
 
+  /// Creates a [PercentageRollout].
   PercentageRollout({
     required this.percentage,
     this.keys,

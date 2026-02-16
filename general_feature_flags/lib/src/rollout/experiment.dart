@@ -1,11 +1,20 @@
 import '../utils/hashing.dart';
 import 'rollout_strategy.dart';
 
+/// A strategy for A/B testing or experimentation.
+///
+/// Distributes users across multiple variations ([variants]) based on their [userId].
 class Experiment<T> extends RolloutStrategy {
+  /// Unique identifier for this experiment.
   final String experimentId;
+  
+  /// A map of variant values to their rollout percentage.
   final Map<T, double> variants; // Variant value to percentage
+  
+  /// The list of flag keys this experiment applies to.
   final List<String> keys;
 
+  /// Creates an [Experiment].
   Experiment({
     required this.experimentId,
     required this.variants,

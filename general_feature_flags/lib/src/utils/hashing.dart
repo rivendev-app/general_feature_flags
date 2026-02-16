@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
+/// Utility class for internal hashing operations.
 class FFHashing {
+  /// Hashes a string into a positive integer.
   static int hashString(String input) {
     final bytes = utf8.encode(input);
     final digest = sha256.convert(bytes);

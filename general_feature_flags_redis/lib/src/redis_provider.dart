@@ -2,11 +2,16 @@ import 'dart:convert';
 import 'package:general_feature_flags/general_feature_flags.dart';
 import 'package:http/http.dart' as http;
 
+/// A feature flag provider that fetches flags from a Redis instance via HTTP (e.g., Upstash).
 class RedisProvider extends BaseFeatureFlagProvider {
   final String url;
   final String? token;
   final Map<String, FeatureFlag> _cache = {};
 
+  /// Creates a [RedisProvider].
+  ///
+  /// [url] is the REST API endpoint of your Redis instance.
+  /// [token] is the optional authentication token.
   RedisProvider({required this.url, this.token});
 
   @override

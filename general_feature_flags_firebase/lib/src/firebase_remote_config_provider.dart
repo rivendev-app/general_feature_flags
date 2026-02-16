@@ -1,9 +1,13 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:general_feature_flags/general_feature_flags.dart';
 
+/// A feature flag provider that uses Firebase Remote Config as the backend.
 class FirebaseRemoteConfigProvider extends BaseFeatureFlagProvider {
   final FirebaseRemoteConfig _remoteConfig;
 
+  /// Creates a [FirebaseRemoteConfigProvider].
+  ///
+  /// You can optionally provide a specific [remoteConfig] instance.
   FirebaseRemoteConfigProvider({FirebaseRemoteConfig? remoteConfig})
       : _remoteConfig = remoteConfig ?? FirebaseRemoteConfig.instance;
 

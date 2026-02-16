@@ -5,9 +5,15 @@ import '../utils/logger.dart';
 import 'feature_flag_provider.dart';
 import 'feature_flag_resolver.dart';
 
+/// The central client for managing and evaluating feature flags.
+///
+/// Use [FeatureFlagsClient()] to access the singleton instance.
 class FeatureFlagsClient {
   static final FeatureFlagsClient _instance = FeatureFlagsClient._internal();
+
+  /// Returns the singleton instance of [FeatureFlagsClient].
   factory FeatureFlagsClient() => _instance;
+
   FeatureFlagsClient._internal();
 
   final List<FeatureFlagProvider> _providers = [];
@@ -15,10 +21,13 @@ class FeatureFlagsClient {
   FeatureFlagResolver _resolver = DefaultFeatureFlagResolver();
   OverrideStore? _overrideStore;
   
-  String? _userId;
-  Map<String, dynamic>? _attributes;
-  bool _initialized = false;
-
+  /// Initializes the client with the provided [providers] and [strategies].
+  ///
+  /// [userId] and [attributes] are optional and can be used for targeting
+  /// and rollout evaluation.
+  ///
+  /// The [resolver] allows customizing how flags are resolved across providers.
+  /// The [overrideStore] allows local development overrides.
   Future<void> initialize({
     List<FeatureFlagProvider> providers = const [],
     List<RolloutStrategy> strategies = const [],
@@ -51,26 +60,34 @@ class FeatureFlagsClient {
     FFLogger.info('FeatureFlagsClient initialized');
   }
 
+  /// Checks if a feature flag is enabled.
+  ///
+  /// Returns [defaultValue] if the flag is not found or not a boolean.
   bool isEnabled(String key, {bool defaultValue = false}) {
     return getBool(key, defaultValue: defaultValue);
   }
 
+  /// Returns a boolean value for the given [key].
   bool getBool(String key, {bool defaultValue = false}) {
     return _getValue<bool>(key, defaultValue);
   }
 
+  /// Returns a string value for the given [key].
   String getString(String key, {String defaultValue = ''}) {
     return _getValue<String>(key, defaultValue);
   }
 
+  /// Returns an integer value for the given [key].
   int getInt(String key, {int defaultValue = 0}) {
     return _getValue<int>(key, defaultValue);
   }
 
+  /// Returns a double value for the given [key].
   double getDouble(String key, {double defaultValue = 0.0}) {
     return _getValue<double>(key, defaultValue);
   }
 
+  /// Returns a JSON (Map) value for the given [key].
   Map<String, dynamic> getJson(String key, {Map<String, dynamic> defaultValue = const {}}) {
     return _getValue<Map<String, dynamic>>(key, defaultValue);
   }
@@ -99,6 +116,7 @@ class FeatureFlagsClient {
     return defaultValue; 
   }
 
+  /// Asynchronously resolves a feature flag value across all providers.
   Future<T> getAsync<T>(String key, T defaultValue) async {
     if (_overrideStore != null) {
       final override = _overrideStore!.getOverride<T>(key);
@@ -115,15 +133,18 @@ class FeatureFlagsClient {
     );
   }
 
+  /// Sets a local override for a feature flag.
   void override(String key, dynamic value) {
     _overrideStore?.setOverride(key, value);
     FFLogger.info('Override set: $key = $value');
   }
 
+  /// Removes a local override for a feature flag.
   void clearOverride(String key) {
     _overrideStore?.removeOverride(key);
   }
 
+  /// Refreshes all providers to fetch the latest values.
   Future<void> refresh() async {
     await Future.wait(_providers.map((p) => p.refresh()));
   }

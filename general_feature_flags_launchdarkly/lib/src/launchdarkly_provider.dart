@@ -2,11 +2,16 @@ import 'dart:convert';
 import 'package:general_feature_flags/general_feature_flags.dart';
 import 'package:http/http.dart' as http;
 
+/// A feature flag provider that evaluates flags using the LaunchDarkly evaluation API.
 class LaunchDarklyProvider extends BaseFeatureFlagProvider {
   final String mobileKey;
   final String? _userId;
   final Map<String, dynamic> _flags = {};
 
+  /// Creates a [LaunchDarklyProvider].
+  ///
+  /// [mobileKey] is your LaunchDarkly Mobile Key.
+  /// [userId] is the unique identifier for the user being evaluated.
   LaunchDarklyProvider({required this.mobileKey, String? userId}) : _userId = userId;
 
   @override
@@ -17,6 +22,7 @@ class LaunchDarklyProvider extends BaseFeatureFlagProvider {
     await fetch();
   }
 
+  /// Forcefully fetches and evaluates flags from LaunchDarkly.
   Future<void> fetch() async {
     final userBase64 = base64Url.encode(utf8.encode(jsonEncode({'key': _userId ?? 'anonymous'})));
     final response = await http.get(

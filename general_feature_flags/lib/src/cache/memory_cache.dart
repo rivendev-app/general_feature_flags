@@ -1,10 +1,13 @@
 import '../core/feature_flag.dart';
 import '../core/feature_flag_store.dart';
 
+/// A memory-based cache for feature flags with optional TTL.
 class MemoryCache extends MemoryFeatureFlagStore {
+  /// Time-to-live for cached flags.
   final Duration? ttl;
   final Map<String, DateTime> _timestamps = {};
 
+  /// Creates a [MemoryCache] with an optional [ttl].
   MemoryCache({this.ttl});
 
   @override
