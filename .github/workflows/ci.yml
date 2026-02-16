@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  analyze_and_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: 
+          - general_feature_flags
+          - general_feature_flags_firebase
+          - general_feature_flags_launchdarkly
+          - general_feature_flags_redis
+          - general_feature_flags_http
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          
+      - name: Install Dependencies
+        run: |
+          cd ${{ matrix.package }}
+          flutter pub get
+          
+      - name: Verify Formatting
+        run: |
+          cd ${{ matrix.package }}
+          dart format --set-exit-if-changed .
+          
+      - name: Analyze
+        run: |
+          cd ${{ matrix.package }}
+          flutter analyze
+          
+      - name: Run Tests
+        run: |
+          cd ${{ matrix.package }}
+          flutter test

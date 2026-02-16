@@ -1,0 +1,32 @@
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# iOS/Android
+android/app/debug.keystore
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Symbols
+*.pdb
+*.obj
+*.exe
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db

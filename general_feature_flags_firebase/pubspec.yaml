@@ -1,0 +1,29 @@
+name: general_feature_flags_firebase
+description: Firebase Remote Config adapter for general_feature_flags.
+version: 0.1.0
+homepage: https://rivendev.app
+repository: https://github.com/rivendev/general_feature_flags
+# publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  general_feature_flags: ^0.1.0
+  firebase_remote_config: ^0.10.0+1
+  firebase_core: ^2.24.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  very_good_analysis: ^5.1.0
+
+topics:
+  - feature-flags
+  - firebase
+  - remote-config
+  - flutter
