@@ -21,6 +21,10 @@ class FeatureFlagsClient {
   FeatureFlagResolver _resolver = DefaultFeatureFlagResolver();
   OverrideStore? _overrideStore;
   
+  String? _userId;
+  Map<String, dynamic>? _attributes;
+  bool _initialized = false;
+  
   /// Initializes the client with the provided [providers] and [strategies].
   ///
   /// [userId] and [attributes] are optional and can be used for targeting
