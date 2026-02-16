@@ -79,10 +79,10 @@ packages:
     dependency: "direct main"
     description:
       name: general_feature_flags
-      sha256: a9b43318dd360632bd8fd5cdc7c3d125fdace6c502e3f8b6b7a75baf0b585642
+      sha256: e3f6090b6c41b6c8ad227d8dbd8d402241f0cbffb42f068828f4f4a85de8826c
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.1"
   http:
     dependency: "direct main"
     description:
